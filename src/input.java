@@ -20,6 +20,7 @@ public class input {
 		parseInput();
 	}
 	
+	// helper to parse whole file
 	void parseInput() {
 		try {
 			File csv = new File(file);
@@ -30,12 +31,22 @@ public class input {
 		}
 		
 		try {
-			while ((current = tweetReader.readLine()) != null) {
-				
+			String current;
+			while ((current = parse.readLine()) != null) {
+				parseLine(current);
 			}
 		} catch (IOException e) {
 			System.out.print("There was a problem parsing tweets. Program terminated.");
 			System.exit(0);
+		}
+	}
+	
+	//helper to parse individual csv lines
+	void parseLine(String in) {
+		String[] split = in.split(",");
+		String line = split[3] + "," + split[8];
+		if (uniqueEntries.contains(line)) {
+			uniqueEntries.add(line);
 		}
 	}
 	
