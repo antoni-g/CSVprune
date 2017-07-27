@@ -26,6 +26,7 @@ public class input {
 			File csv = new File(file);
 			parse = new BufferedReader(new FileReader(csv));
 		} catch (IOException e) {
+			e.printStackTrace();
 			System.out.print("There was a problem opening :" + file + ". Program terminated");
 			System.exit(0);
 		}
@@ -44,9 +45,12 @@ public class input {
 	//helper to parse individual csv lines
 	void parseLine(String in) {
 		String[] split = in.split(",");
-		String line = split[3] + "," + split[8];
-		if (uniqueEntries.contains(line)) {
-			uniqueEntries.add(line);
+		if (split.length != 0) {
+			String line = split[3] + "," + split[9];
+			if (!uniqueEntries.contains(line)) {
+				System.out.println(line);
+				uniqueEntries.add(line);
+			}
 		}
 	}
 	

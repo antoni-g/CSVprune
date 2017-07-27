@@ -16,15 +16,17 @@ public class output {
 			String outputName = "output ";
 			String timeStamp = new SimpleDateFormat("yyyy.MM.dd.HH.mm.ss").format(new Date());
 			outputName += timeStamp;
-			
+			outputName += ".csv";
+						
 			toFile = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(outputName), "utf-8"));
 			// file header
-			toFile.write("Designation,Case Type\n");
 
 			// iterate over lists of lists
 			for (List<String> l : inputs) {
 				for (String s : l) {
+					System.out.println(s);
 					toFile.write(s);
+					toFile.newLine();
 				}
 			}
 			
@@ -32,6 +34,7 @@ public class output {
 			System.out.println("There was a problem writing to the output file. Program terminated.");
 		} finally {
 			try {
+				toFile.flush();
 				toFile.close();
 			} catch (IOException e) {
 				System.out.println("There was a problem closing the output file. Program terminated.");
